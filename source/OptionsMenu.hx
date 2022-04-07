@@ -24,6 +24,7 @@ class OptionsMenu extends MusicBeatState
 
 	var options:Array<OptionCategory> = [
 		new OptionCategory("Gameplay", [
+			new AndroidControls(),
 			new DFJKOption(controls),
 			new SpectatorMode("Disables all the HUD Elements and serves for a good Cinematic Gamplay."),
 			new DownscrollOption("Change the layout of the strumline."),
@@ -108,6 +109,10 @@ class OptionsMenu extends MusicBeatState
 
 		FlxTween.tween(versionShit,{y: FlxG.height - 18},2,{ease: FlxEase.elasticInOut});
 		FlxTween.tween(blackBorder,{y: FlxG.height - 18},2, {ease: FlxEase.elasticInOut});
+		
+		#if android
+		addVirtualPad(FULL, A_B);
+		#end
 
 		super.create();
 	}
