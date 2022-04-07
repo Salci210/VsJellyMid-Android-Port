@@ -23,6 +23,8 @@ class Credits extends MusicBeatState
 	private var iconArray:Array<AttachedSprite> = [];
 
 	private static var creditsStuff:Array<Dynamic> = [ //Name - Icon name - Description - Link - BG Color
+		['Android Port'],
+		['Boyfriend FNF', 'nothing', 'you know what', 'https://youtube.com/c/BoyfriendFNF', 0xFF41009C],
 		['VS jELLYMID TEaM'],
 		['THEGaBODIaZ', 'gabo', 'Creator - Main artist & Animator, Composer of Jellymid, Cover Creator of Atrocity MC Version, Charter', 'https://youtube.com/thegabodiaz', 0xFF5EEBD8],
 		['TRaCEDINPURPLE', 'tiago', 'Co-Creator - Main Coder, Menus', 'https://youtube.com/tracedinpurple', 0xFF41009C],
@@ -92,7 +94,12 @@ class Credits extends MusicBeatState
 
 		bg.color = creditsStuff[curSelected][4];
 		originalColor = bg.color;
-		changeSelection();
+		changeSelection()
+			
+		#if android
+		addVirtualPad(UP_DOWN, A_B);
+		#end
+			
 		super.create();
 	}
 
