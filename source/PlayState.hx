@@ -660,6 +660,10 @@ class PlayState extends MusicBeatState
 		if (loadRep)
 			replayTxt.cameras = [camHUD];
 
+                #if android
+	        addAndroidControls();
+                #end
+
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
@@ -706,6 +710,9 @@ class PlayState extends MusicBeatState
 	{
 		inCutscene = false;
 
+	        #if android
+	        androidc.visible = true;
+	        #end
 		generateStaticArrows(0);
 		generateStaticArrows(1);
 
@@ -1442,7 +1449,7 @@ class PlayState extends MusicBeatState
 
 		scoreTxt.text = Ratings.CalculateRanking(songScore,songScoreDef,nps,maxNPS,accuracy);
 
-		if (controls.PAUSE && startedCountdown && canPause)
+		if (controls.PAUSE #if android || FlxG.android.justReleased.BACK #end && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
 			persistentDraw = true;
@@ -2020,6 +2027,9 @@ class PlayState extends MusicBeatState
 		canPause = false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
+                #if android
+	        androidc.visible = false;
+	        #end
 		if (SONG.validScore)
 		{
 			#if !switch
@@ -2063,7 +2073,7 @@ class PlayState extends MusicBeatState
 
 					if (SONG.validScore)
 					{
-						NGio.unlockMedal(60961);
+						//NGio.unlockMedal(60961);
 						Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
 					}
 
@@ -2672,16 +2682,6 @@ class PlayState extends MusicBeatState
 		var xml = [];
 		trace("caching");
 
-		for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/jellyleandeath")))
-		{
-			if (!i.endsWith(".png"))
-				continue;
-			images.push(i);
-
-			if (!i.endsWith(".xml"))
-				continue;
-			xml.push(i);
-		}
 		for (i in images)
 		{
 			var replaced = i.replace(".png","");
