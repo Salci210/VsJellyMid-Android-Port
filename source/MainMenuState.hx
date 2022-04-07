@@ -14,7 +14,6 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import io.newgrounds.NG;
 import lime.app.Application;
 import lime.system.System;
 
@@ -172,6 +171,10 @@ class MainMenuState extends MusicBeatState
         //textBox.updateHitbox();
 		//add(textBox);
 		//textBox.visible = false;
+					
+		#if android
+		addVirtualPad(NONE, B);
+		#end
 
 		super.create();
 	}
