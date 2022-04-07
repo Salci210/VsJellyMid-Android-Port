@@ -87,6 +87,11 @@ class SpammingSubState extends MusicBeatSubstate
 	
 			add(menuItems);
 			FlxG.camera.zoom = defaultCamZoom;
+			
+		         #if android
+		         addVirtualPad(NONE, B);
+		         #end
+
 			super.create();
 		}
 		var selectedSomethin:Bool = false;
